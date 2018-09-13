@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.content_home.*
@@ -19,8 +20,8 @@ import lucasveras.com.br.projetofinalandroid.firebase.FirebaseBO
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    var images: Array<Int> = arrayOf(R.drawable.one, R.drawable.two, R.drawable.three)
-    var bannerAdapter: PagerAdapter = BannerImagesAdapter(context = this, images = images)
+    private var images: Array<Int> = arrayOf(R.drawable.one, R.drawable.two, R.drawable.three)
+    private var bannerAdapter: PagerAdapter = BannerImagesAdapter(context = this, images = images)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +36,19 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
 
         nav_view.getHeaderView(0).userEmailTxt.text = FirebaseBO.instance.mAuth?.currentUser?.email ?: ""
+        nav_view.getHeaderView(0).userNameTxt.text = FirebaseBO.instance.mAuth?.currentUser?.displayName ?: ""
 
         imageBanner.adapter = bannerAdapter
+
+        FirebaseBO.instance.getNews(this, {
+            Toast.makeText(this, "Achou notivicas", Toast.LENGTH_LONG).show()
+        })
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        nav_view.getHeaderView(0).userNameTxt.text = FirebaseBO.instance.mAuth?.currentUser?.displayName ?: ""
     }
 
     override fun onBackPressed() {
@@ -73,7 +85,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(intent)
             }
             R.id.nav_update_perfil -> {
-                val intent = Intent(this, UpdateAccount::class.java)
+                val intent = Intent(this, UpdateAccountActivity::class.java)
                 startActivity(intent)
             }
         }

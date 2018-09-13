@@ -6,7 +6,7 @@ import kotlinx.android.synthetic.main.activity_update_account.*
 import lucasveras.com.br.projetofinalandroid.R
 import lucasveras.com.br.projetofinalandroid.firebase.FirebaseBO
 
-class UpdateAccount : AppCompatActivity() {
+class UpdateAccountActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,6 +16,9 @@ class UpdateAccount : AppCompatActivity() {
     }
 
     private fun updateUser() {
-        FirebaseBO.instance.updateUser(userNameEditText.text.toString())
+        FirebaseBO.instance.updateUser(userNameEditText.text.toString(), {
+            finish()
+        })
     }
+
 }

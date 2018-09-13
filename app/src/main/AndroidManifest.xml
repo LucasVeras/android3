@@ -9,7 +9,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Login"
+        android:label="Projeto Android 3"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -32,7 +32,7 @@
         </activity>
 
         <activity
-            android:name=".activities.ForgotPassword"
+            android:name=".activities.ForgotPasswordActivity"
             android:label="Esqueci a senha"
             android:parentActivityName=".activities.LoginActivity">
 
@@ -58,7 +58,7 @@
                 android:value=".activities.HomeActivity" />
         </activity>
 
-        <activity android:name=".activities.UpdateAccount"
+        <activity android:name=".activities.UpdateAccountActivity"
             android:label="Atualizar o perfil"
             android:parentActivityName=".activities.HomeActivity">
 

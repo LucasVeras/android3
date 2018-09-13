@@ -7,7 +7,7 @@ import android.widget.Toast
 import lucasveras.com.br.projetofinalandroid.R
 import lucasveras.com.br.projetofinalandroid.firebase.FirebaseBO
 
-class ForgotPassword : AppCompatActivity() {
+class ForgotPasswordActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,10 +20,10 @@ class ForgotPassword : AppCompatActivity() {
         FirebaseBO.instance.mAuth?.sendPasswordResetEmail(emailEditText.text.toString())
                 ?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(this@ForgotPassword, "Um e-mail foi enviado para redefinir a senha.",
+                        Toast.makeText(this@ForgotPasswordActivity, "Um e-mail foi enviado para redefinir a senha.",
                                 Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(this@ForgotPassword, "Falha no redefinir senha.",
+                        Toast.makeText(this@ForgotPasswordActivity, "Falha no redefinir senha.",
                                 Toast.LENGTH_SHORT).show()
                     }
                 }

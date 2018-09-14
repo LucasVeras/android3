@@ -7,15 +7,16 @@ import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.content_home.*
 import kotlinx.android.synthetic.main.nav_header_home.view.*
 import lucasveras.com.br.projetofinalandroid.R
 import lucasveras.com.br.projetofinalandroid.adapters.BannerImagesAdapter
+import lucasveras.com.br.projetofinalandroid.adapters.NewsListAdapter
 import lucasveras.com.br.projetofinalandroid.firebase.FirebaseBO
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -41,7 +42,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         imageBanner.adapter = bannerAdapter
 
         FirebaseBO.instance.getNews(this, {
-            Toast.makeText(this, "Achou notivicas", Toast.LENGTH_LONG).show()
+            newsListRecyclerview.adapter = NewsListAdapter(it, this@HomeActivity)
+            val layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+            newsListRecyclerview.layoutManager = layoutManager
         })
     }
 

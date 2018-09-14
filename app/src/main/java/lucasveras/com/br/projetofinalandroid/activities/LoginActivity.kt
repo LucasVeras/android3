@@ -20,15 +20,17 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login() {
-        FirebaseBO.instance.mAuth?.signInWithEmailAndPassword(emailEditText.text.toString(), passwordEditText.text.toString())
-                ?.addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        val intent = Intent(this, HomeActivity::class.java)
-                        startActivity(intent)
-                    } else {
-                        Toast.makeText(this@LoginActivity, "Falha no login", Toast.LENGTH_SHORT).show()
+        if (!emailEditText.text.isEmpty() && !passwordEditText.text.isEmpty()) {
+            FirebaseBO.instance.mAuth?.signInWithEmailAndPassword(emailEditText.text.toString(), passwordEditText.text.toString())
+                    ?.addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            val intent = Intent(this, HomeActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            Toast.makeText(this@LoginActivity, "Falha no login", Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
+        }
     }
 
     private fun registerNewUser() {
